@@ -1,0 +1,47 @@
+{
+    // IntelliSense를 사용하여 가능한 특성에 대해 알아보세요.
+    // 기존 특성에 대한 설명을 보려면 가리킵니다.
+    // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
+    "version": "0.2.0",
+    "configurations": [ {
+        "name": "local",
+        "type": "go",
+        "request": "launch",
+        "mode": "auto",
+        "program": "/Users/bumkey/Documents/LogTest/acloud-alarm-collector",
+        "cwd": "/Users/bumkey/Documents/LogTest/acloud-alarm-collector",
+        "env": {
+          "SERVICE_PORT": "9201",
+          "VERSION": "4.6.1",
+          "LOGGING_LEVEL": "debug",
+          "AUTH_SERVER_URL": "http://api-server:8080",
+          "AUTH_TOKEN": "455a127f2cd6959891d03ff408f36c00ebe5fb030e945eb5d2f98227ad939bb2",
+          "CLUSTER_ID": "acorn-demo-cluster",
+          "CLUSTER_SEQ": "1",
+          "DEV_MODE": "true",
+          "DEV_SKIP_AUTH": "true",
+          "DEV_SKIP_TRANSMIT": "true",
+          "DEV_SKIP_SAVE": "true",
+          "PROCESSING_MAP_PATH": "",
+          "USE_KAFKA": "true",
+          "KAFKA_BROKER_ADDRRESSES": "101.55.69.32:30007",
+          "KAFKA_TOPIC": "alarms",
+          "KAFKA_TLS": "true",
+          "KAFKA_CERT_FILE_PATH": "/Users/bumkey/acornsoft/work/cert/capital/kafka",
+          "KAFKA_CA_CERT": "ca.crt",
+          "KAFKA_CLIENT_CERT": "client.crt",
+          "KAFKA_CLIENT_KEY": "client.key",
+          "KAFKA_CONSUMER_GROUP": "alarm-group-2",
+          "DB_ENGINE": "postgres",
+          "DB_USER": "tsdbuser",
+          "DB_PASSWORD": "tsdbpass",
+          "DB_NAME": "monitoring",
+          "DB_HOST": "localhost",
+          "DB_PORT": "5432",
+          "DB_TLS": "false",
+        },
+        "args": []
+      },
+    ]
+    
+}

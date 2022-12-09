@@ -6,6 +6,7 @@ import (
 	"strings"
 	"time"
 
+	alarmlog "github.com/cocktailcloud/acloud-alarm-collector/application/logger"
 	"github.com/cocktailcloud/acloud-alarm-collector/application/structure"
 	"github.com/cocktailcloud/acloud-monitoring-common/v2/logger"
 	"github.com/cocktailcloud/acloud-monitoring-common/v2/types"
@@ -48,6 +49,9 @@ func (s *AlarmService) ReceiveAlarmsProcess(envelop *types.TransmitEnvelop) ([][
 		severity := labels["severity"]
 
 		description := getDescription(alert.Get("annotations"))
+		//
+		ruleID := getRuleId(alert.Get("annotations"))
+		//
 		status, err := getStringValue(alert, false, "status")
 		if err != nil {
 			logger.Error(err.Error())
@@ -99,6 +103,7 @@ func (s *AlarmService) ReceiveAlarmsProcess(envelop *types.TransmitEnvelop) ([][
 			Alertname:    alertname,
 			Severity:     severity,
 			Description:  description,
+			RuleId:       ruleID,
 			Status:       status,
 			AlarmKey:     alarmKey,
 			StartsAt:     startsAtUTC,
@@ -110,6 +115,9 @@ func (s *AlarmService) ReceiveAlarmsProcess(envelop *types.TransmitEnvelop) ([][
 			Retry: 0,
 			Alarm: alarmObject,
 		}
+
+		// alarmlog.History(alarmHistoryFormat(alarmObject, "json"))
+		alarmlog.AlarmHistoryFormat("txt", clusterId, alertname, ruleID, severity, status, startsAt, endsAtUTC, description)
 
 		s.MainQueue.Add(alertItem)
 	}
@@ -175,10 +183,10 @@ func contains(s []string, str string) bool {
 
 // Rule 1
 //   - alarmname == 'EventWarning'
-//     * Failed 문자열 포함한 경우
-//     * Evicted
-//     * Rebooted
-//     * NodeNotReady
+//   - Failed 문자열 포함한 경우
+//   - Evicted
+//   - Rebooted
+//   - NodeNotReady
 func checkFiltering(labels map[string]string) (bool, string) {
 
 	allowListForEventWarning := []string{"Evicted", "Rebooted", "NodeNotReady"}

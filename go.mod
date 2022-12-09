@@ -14,5 +14,7 @@ require (
 	github.com/robfig/cron/v3 v3.0.1
 	github.com/valyala/fastjson v1.6.1
 	github.com/zemirco/uid v0.0.0-20160129141151-3763f3c45832
+	go.uber.org/zap v1.19.0
+	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gopkg.in/yaml.v2 v2.3.0 // indirect
 )

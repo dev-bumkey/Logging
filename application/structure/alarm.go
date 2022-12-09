@@ -21,9 +21,12 @@ type Alarm struct {
 	Alertname    string
 	Severity     string
 	Description  string
-	Status       string
-	AlarmKey     string
-	StartsAt     time.Time
-	EndsAt       time.Time
-	Timestamp    time.Time
+	//
+	RuleId string
+	//
+	Status    string
+	AlarmKey  string
+	StartsAt  time.Time
+	EndsAt    time.Time
+	Timestamp time.Time
 }

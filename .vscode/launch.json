@@ -8,8 +8,8 @@
         "type": "go",
         "request": "launch",
         "mode": "auto",
-        "program": "/Users/bumkey/Documents/LogTest/acloud-alarm-collector",
-        "cwd": "/Users/bumkey/Documents/LogTest/acloud-alarm-collector",
+        "program": "/Users/bumkey/Documents/GitHub/Logging",
+        "cwd": "/Users/bumkey/Documents/GitHub/Logging",
         "env": {
           "SERVICE_PORT": "9201",
           "VERSION": "4.6.1",

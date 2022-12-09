@@ -197,6 +197,33 @@ func (service *AlarmService) InsertAlerts(envelop *types.TransmitEnvelop) ([][]b
 	return insertedAlarms, nil
 }
 
+func getRuleId(item *fastjson.Value) string {
+	if item == nil {
+		return ""
+	}
+
+	o, err := item.Object()
+	if err != nil {
+		logger.Warn(err.Error())
+		return ""
+	}
+
+	messages := bytes.Buffer{}
+	o.Visit(func(k []byte, v *fastjson.Value) {
+		key := string(k)
+
+		if !strings.HasPrefix(string(key), "rule") {
+			return
+		}
+		var result = strings.Trim(key, "rule_id")
+		messages.WriteString(result)
+		messages.Write(v.GetStringBytes())
+
+	})
+
+	return messages.String()
+}
+
 func getDescription(item *fastjson.Value) string {
 	if item == nil {
 		return ""

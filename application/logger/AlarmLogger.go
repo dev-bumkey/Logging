@@ -5,8 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	jsonLog "log"
-	"time"
+	newLog "log"
 
 	"github.com/cocktailcloud/acloud-alarm-collector/application/structure"
 	"go.uber.org/zap"
@@ -107,22 +106,13 @@ func NewZapLogger(enable bool, path string) {
 	}
 }
 
-func AlarmHistoryFormat(format string, clusterId, alertname, ruleID, severity, status string, startsAt, endsAt time.Time, description string) {
+func AlarmHistoryFormat(format string, alarmhistory *structure.AlarmHistory) {
 
-	alarmJson := &structure.AlarmHistory{
-		ClusterId:   clusterId,
-		Alertname:   alertname,
-		RuleId:      ruleID,
-		Severity:    severity,
-		Status:      status,
-		StartsAt:    startsAt,
-		EndsAt:      endsAt,
-		Description: description,
-	}
+	alarmJson := &alarmhistory
 	result, err := json.Marshal(alarmJson)
 
 	if err != nil {
-		jsonLog.Fatalf("JSON marshaling failed: %s", err)
+		newLog.Fatalf("JSON marshaling failed: %s", err)
 	}
 	if format == "json" {
 		fmt.Println(string(result))

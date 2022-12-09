@@ -116,8 +116,18 @@ func (s *AlarmService) ReceiveAlarmsProcess(envelop *types.TransmitEnvelop) ([][
 			Alarm: alarmObject,
 		}
 
+		alarmhistroy := &structure.AlarmHistory{
+			ClusterId:   clusterId,
+			Alertname:   alertname,
+			RuleId:      ruleID,
+			Severity:    severity,
+			Status:      status,
+			StartsAt:    startsAt,
+			EndsAt:      endsAtUTC,
+			Description: description,
+		}
 		// alarmlog.History(alarmHistoryFormat(alarmObject, "json"))
-		alarmlog.AlarmHistoryFormat("txt", clusterId, alertname, ruleID, severity, status, startsAt, endsAtUTC, description)
+		alarmlog.AlarmHistoryFormat("json", alarmhistroy)
 
 		s.MainQueue.Add(alertItem)
 	}

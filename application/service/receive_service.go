@@ -50,6 +50,7 @@ func (s *AlarmService) ReceiveAlarmsProcess(envelop *types.TransmitEnvelop) ([][
 
 		description := getDescription(alert.Get("annotations"))
 		//
+		engMsg := getEngMsg(alert.Get("annotations"))
 		ruleID := getRuleId(alert.Get("annotations"))
 		//
 		status, err := getStringValue(alert, false, "status")
@@ -117,17 +118,17 @@ func (s *AlarmService) ReceiveAlarmsProcess(envelop *types.TransmitEnvelop) ([][
 		}
 
 		alarmhistroy := &structure.AlarmHistory{
-			ClusterId:   clusterId,
-			Alertname:   alertname,
-			RuleId:      ruleID,
-			Severity:    severity,
-			Status:      status,
-			StartsAt:    startsAt,
-			EndsAt:      endsAtUTC,
-			Description: description,
+			ClusterId: clusterId,
+			Alertname: alertname,
+			RuleId:    ruleID,
+			Severity:  severity,
+			Status:    status,
+			StartsAt:  startsAt,
+			EndsAt:    endsAtUTC,
+			EngMsg:    engMsg,
 		}
 		// alarmlog.History(alarmHistoryFormat(alarmObject, "json"))
-		alarmlog.AlarmHistoryFormat("json", alarmhistroy)
+		alarmlog.AlarmHistoryFormat(alarmhistroy)
 
 		s.MainQueue.Add(alertItem)
 	}

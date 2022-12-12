@@ -39,6 +39,9 @@
           "DB_HOST": "localhost",
           "DB_PORT": "5432",
           "DB_TLS": "false",
+          //"ENABLE_FILE":"true",
+          //"FILE_JSON_FORMAT":"txt",
+          //"FILE_LOCATION":"/Users/bumkey/Documents/info/log.log",
         },
         "args": []
       },

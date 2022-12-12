@@ -224,6 +224,33 @@ func getRuleId(item *fastjson.Value) string {
 	return messages.String()
 }
 
+func getEngMsg(item *fastjson.Value) string {
+	if item == nil {
+		return ""
+	}
+
+	o, err := item.Object()
+	if err != nil {
+		logger.Warn(err.Error())
+		return ""
+	}
+
+	messages := bytes.Buffer{}
+	o.Visit(func(k []byte, v *fastjson.Value) {
+		key := string(k)
+
+		if !strings.HasPrefix(string(key), "message_en") {
+			return
+		}
+		var result = strings.Trim(key, "message_en")
+		messages.WriteString(result)
+		messages.Write(v.GetStringBytes())
+
+	})
+
+	return messages.String()
+}
+
 func getDescription(item *fastjson.Value) string {
 	if item == nil {
 		return ""

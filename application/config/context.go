@@ -9,7 +9,8 @@ import (
 )
 
 type Context struct {
-	Config     *Config
+	Config *Config
+	//AlarmConfig *AlarmConfig
 	DBAdapter  database.DBAdapter
 	MainQueue  utils.AlarmQueue
 	RetryQueue utils.AlarmQueue

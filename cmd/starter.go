@@ -8,7 +8,6 @@ import (
 	"github.com/cocktailcloud/acloud-alarm-collector/application/database"
 	adapter "github.com/cocktailcloud/acloud-alarm-collector/application/logger"
 
-	//"github.com/cocktailcloud/acloud-alarm-collector/application/database"
 	"github.com/cocktailcloud/acloud-alarm-collector/application/kafka"
 	"github.com/cocktailcloud/acloud-alarm-collector/application/route"
 	"github.com/cocktailcloud/acloud-alarm-collector/application/scheduler"
@@ -59,8 +58,18 @@ func init() {
 		logger.Fatalf("Could not instantiate log %ss", err.Error())
 	}
 
-	adapter.NewZapLogger(true, "/Users/bumkey/Documents/info/test.log")
-	//adapter.History()
+	// alarmconf, err := config.Collect()
+	// if err != nil {
+	// 	panic(err)
+	// }
+	// context.AlarmConfig = alarmconf
+
+	err = adapter.NewAlarmLogger(conf)
+	if err != nil {
+		logger.Fatalf("Could not instantiate log %ss", err.Error())
+	}
+
+	//adapter.NewZapLogger(alarm)
 
 	// create server instance & initialize the server
 	gatewayServer = server.NewInstance(conf.ServerConfig)

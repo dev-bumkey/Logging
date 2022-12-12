@@ -38,6 +38,11 @@ type Config struct {
 
 	IntervalForOrphan string `env:"INTERVAL_ORPHAN" envDefault:"3 day"`
 	RetryLimit        int    `env:"RETRY_LIMIT"`
+
+	EnableFile     bool   `env:"ENABLE_FILE" envDefault:"false"`
+	FileJSONFormat string `env:"FILE_JSON_FORMAT" envDefault:"txt"`
+	FileLocation   string `env:"FILE_LOCATION" envDefault:"/var/log/cocktailcloud/alarm-collector.log"`
+	//FileLocation string `env:"FILE_LOCATION" envDefault:"/Users/bumkey/Documents/info/test3.log"`
 }
 
 var Default = &Config{
